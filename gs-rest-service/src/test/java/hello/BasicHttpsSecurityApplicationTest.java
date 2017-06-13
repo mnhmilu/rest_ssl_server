@@ -53,21 +53,18 @@ public class BasicHttpsSecurityApplicationTest {
 
 		TestRestTemplate restTemplate = new TestRestTemplate();
 		restTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory(
-				HttpClients.custom().setSSLSocketFactory(socketFactory()).build()));
+			HttpClients.custom().setSSLSocketFactory(socketFactory()).build()));
 
-		ResponseEntity<Greeting> httpsEntity = restTemplate.getForEntity("https://localhost:8443/greeting",
-				Greeting.class);
+		ResponseEntity<String> httpsEntity = restTemplate.getForEntity("https://192.168.0.104:8443/greeting",
+				String.class);
 
 		assertThat(httpsEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-		// assertThat(httpsEntity.getBody()).containsIgnoringCase("hello, rod");
+	    assertThat(httpsEntity.getBody()).containsIgnoringCase("nahid");
 
 	}
 
 	private SSLConnectionSocketFactory socketFactory() throws Exception {
-		char[] password = "changeit".toCharArray();
-		//KeyStore truststore = KeyStore.getInstance("PKCS12");
-		//truststore.load(new ClassPathResource("cid.p12").getInputStream(), password);
-		
+		char[] password = "changeit".toCharArray();		
 		KeyStore truststore = KeyStore.getInstance("JKS");
 		truststore.load(new ClassPathResource("truststore.jks").getInputStream(), password);
 		SSLContextBuilder builder = new SSLContextBuilder();
