@@ -11,6 +11,7 @@ $> make create-keystore PASSWORD=changeit
 Now, we will add a certificate for our development host to this created keystore and sign it by our certificate authority:
 
 
+
 $> make add-host HOSTNAME=localhost
 
 To allow client authentication, we also need a keystore called “truststore”. This truststore has to contain valid certificates of our certificate authority and all of the allowed clients. For reference on using keytool, please look into the Makefile at the following given sections:
