@@ -23,14 +23,18 @@ public class GreetingController {
 
     @RequestMapping("/greeting")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name,Principal principal) {
+    public String greeting(@RequestParam(value="name", defaultValue="World") String name,Principal principal) {
     
     	
     	UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
     	
     	log.info("User is :"+ currentUser.getUsername());
     	
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
+    	
+    	return "nahid";
+    	
+    	
+        //return new Greeting(counter.incrementAndGet(),
+          //                  String.format(template, name));
     }
 }

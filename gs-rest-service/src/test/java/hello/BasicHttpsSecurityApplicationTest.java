@@ -55,11 +55,11 @@ public class BasicHttpsSecurityApplicationTest {
 		restTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory(
 				HttpClients.custom().setSSLSocketFactory(socketFactory()).build()));
 
-		ResponseEntity<Greeting> httpsEntity = restTemplate.getForEntity("https://localhost:8443/greeting",
-				Greeting.class);
+		ResponseEntity<String> httpsEntity = restTemplate.getForEntity("https://localhost:8443/greeting",
+				String.class);
 
 		assertThat(httpsEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-		// assertThat(httpsEntity.getBody()).containsIgnoringCase("hello, rod");
+		assertThat(httpsEntity.getBody()).containsIgnoringCase("nahid");
 
 	}
 
